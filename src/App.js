@@ -15,7 +15,28 @@ class App extends Component {
       this.state={
         todos
       };
+      this.handleAddTodo=this.handleAddTodo.bind(this);
     };
+
+  handleAddTodo(todo){
+      this.setState({
+        todos: [...this.state.todos,todo]
+      })
+    };
+
+    removeTodo(index)
+    {
+      if(window.confirm('seguro de eliminar'))
+      {
+        this.setState({
+          todos:this.state.todos.filter((e,i)=>{
+              return i !== index
+          })
+        })
+      }
+      
+    }
+  
   render() {
     //console.log(this.state.todos);
     //recorer el  com map 
@@ -30,7 +51,13 @@ class App extends Component {
                 </span>
               </div>
               <div className='card-body'>
-                  {todo.description}
+                  <p>{todo.description}</p>
+                  <p>{todo.responsible}</p>
+              </div>
+              <div className='card-footer'>
+                <botton className='btn btn-danger' onClick={this.removeTodo.bind(this,i)}>
+                  Delete
+                </botton>
               </div>
           </div>
           </div>
@@ -42,7 +69,7 @@ class App extends Component {
         <div className='container'>
         <div className="row mt-4">
             <div className="col-md-4 text-center">
-                  <Formulario ></Formulario>
+                  <Formulario  onAddTodo={this.handleAddTodo}></Formulario>
             </div>
               
               <div className="col-md-8">

@@ -18,10 +18,11 @@ class Formulario extends Component{
         this.setState({
             [name]:value
         })
-        console.log(this.state)
+        //console.log(this.state)
     }
     HandleSubmit(e){
         e.preventDefault();
+        this.props.onAddTodo(this.state);
         console.log(this.state)
         console.log('set an date');
     
